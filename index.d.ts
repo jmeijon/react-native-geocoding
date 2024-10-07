@@ -42,7 +42,7 @@ declare namespace Geocoder {
     | { latitude: number; longitude: number }
     | string;
 
-  function init(apiKey: string, options?: Object): void;
+  function init(apiKey: string, options?: Object, configuration?: Object): void;
   function isInit(): boolean;
   function from(...params: fromParams[]): Promise<GeocoderResponse>;
 }
