@@ -5,6 +5,7 @@ let Geocoder;
 export default Geocoder = {
 	apiKey : null,
 	options : {},
+	configuration : {}
 	
 	/**
 	 * Initialize the module.
@@ -12,9 +13,10 @@ export default Geocoder = {
 	 * @param {Object} [options] extra options for your geocoding request.
 	 * @see https://developers.google.com/maps/documentation/geocoding/intro#geocoding
 	 */
-	init(apiKey, options = {}) {
+	init(apiKey, options = {}, configuration = {}) {
 		this.apiKey = apiKey;
 		this.options = options;
+		this.configuration = configuration;
 	},
 
 	/**
@@ -80,13 +82,16 @@ export default Geocoder = {
 
 		queryParams = { key: this.apiKey, ...this.options, ...queryParams }
 		// build url
-		const url = `https://maps.google.com/maps/api/geocode/json?${toQueryParams(queryParams)}`;
-
+		const url = configuration.apiUrl? configuration.apiUrl : 'https://maps.google.com/maps/api' +  `/geocode/json?${toQueryParams(queryParams)}`;
+		const headers = configuration.getHeaders? configuration.getHeaders() : {};
 		let response, data;
 
 		// fetch
 		try {
-			response = await fetch(url);
+			response = await fetch(url{
+			    method: 'GET',
+			    headers: headers,
+			  });
 		} catch(error) {
 			throw {
 				code : Geocoder.Errors.FETCHING,
