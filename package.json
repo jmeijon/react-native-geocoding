@@ -1,7 +1,7 @@
 {
-  "name": "react-native-geocoding",
-  "version": "0.5.0",
-  "description": "A React Native module to transform a description of a location (i.e. street address, town name, etc.) into geographic coordinates (i.e. latitude and longitude) and vice versa.",
+  "name": "react-native-geocoding-custom",
+  "version": "0.6.0",
+  "description": "A React Native module to transform a description of a location (i.e. street address, town name, etc.) into geographic coordinates (i.e. latitude and longitude) and vice versa. Included change url support and headers",
   "main": "Geocoder.js",
   "typings": "./index.d.ts",
   "repository": {
