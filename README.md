@@ -7,13 +7,13 @@ This module uses [Google Maps Geocoding API](https://developers.google.com/maps/
 ## Install
 
 ```shell
-npm install --save react-native-geocoding
+npm install --save react-native-geocoding-custom
 ```
 
 ## Example
 
 ```js
-import Geocoder from 'react-native-geocoding';
+import Geocoder from "react-native-geocoding-custom";
 
 // Initialize the module (needs to be done only once)
 Geocoder.init("xxxxxxxxxxxxxxxxxxxxxxxxx"); // use a valid API key
@@ -22,43 +22,44 @@ Geocoder.init("xxxxxxxxxxxxxxxxxxxxxxxxx"); // use a valid API key
 
 // Search by address
 Geocoder.from("Colosseum")
-		.then(json => {
-			var location = json.results[0].geometry.location;
-			console.log(location);
-		})
-		.catch(error => console.warn(error));
+  .then((json) => {
+    var location = json.results[0].geometry.location;
+    console.log(location);
+  })
+  .catch((error) => console.warn(error));
 
 // Search by address, with a biased geo-bounds
 Geocoder.from("Pyramid", {
-		southwest: {lat: 36.05, lng: -115.25},
-		northeast: {lat: 36.16, lng: -115.10}})
-		.then(json => {
-			var location = json.results[0].geometry.location;
-			console.log(location);
-		})
-		.catch(error => console.warn(error));
+  southwest: { lat: 36.05, lng: -115.25 },
+  northeast: { lat: 36.16, lng: -115.1 },
+})
+  .then((json) => {
+    var location = json.results[0].geometry.location;
+    console.log(location);
+  })
+  .catch((error) => console.warn(error));
 
 // Search by geo-location (reverse geo-code)
 Geocoder.from(41.89, 12.49)
-		.then(json => {
-        		var addressComponent = json.results[0].address_components[0];
-			console.log(addressComponent);
-		})
-		.catch(error => console.warn(error));
+  .then((json) => {
+    var addressComponent = json.results[0].address_components[0];
+    console.log(addressComponent);
+  })
+  .catch((error) => console.warn(error));
 
 // Works as well :
 // ------------
 
 // location object
 Geocoder.from({
-	latitude : 41.89,
-	longitude : 12.49
+  latitude: 41.89,
+  longitude: 12.49,
 });
 
 // latlng object
 Geocoder.from({
-	lat : 41.89,
-	lng : 12.49
+  lat: 41.89,
+  lng: 12.49,
 });
 
 // array
@@ -66,14 +67,14 @@ Geocoder.from([41.89, 12.49]);
 ```
 
 # Error Codes
-| Name | Code | Description |
-| --- | --- | --- |
-| NOT_INITIATED | 0 | Module hasn't been initiated. Call init function, and pass it your app's api key as parameter. |
-| INVALID_PARAMETERS | 1 | Parameters are invalid. |
-| FETCHING | 2 | Error wile fetching to server. The error's 'origin' property contains the fetch error. |
-| PARSING | 3 | Error while parsing server response. The error's 'origin' property contains the response. |
-| SERVER | 4 | Error from the server. The error's 'origin' property contains the response's body. |
 
+| Name               | Code | Description                                                                                    |
+| ------------------ | ---- | ---------------------------------------------------------------------------------------------- |
+| NOT_INITIATED      | 0    | Module hasn't been initiated. Call init function, and pass it your app's api key as parameter. |
+| INVALID_PARAMETERS | 1    | Parameters are invalid.                                                                        |
+| FETCHING           | 2    | Error wile fetching to server. The error's 'origin' property contains the fetch error.         |
+| PARSING            | 3    | Error while parsing server response. The error's 'origin' property contains the response.      |
+| SERVER             | 4    | Error from the server. The error's 'origin' property contains the response's body.             |
 
 ## Release Notes
 

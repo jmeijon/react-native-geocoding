@@ -34,7 +34,10 @@ declare namespace Geocoder {
     }[];
     status: 'OK' | string;
   }
-
+  interface Configuration{
+    getHeaders? : () => Promise<Record<string, string>>;
+    apiUrl?: string;
+  }
   type fromParams =
     | number
     | number[]
@@ -42,11 +45,11 @@ declare namespace Geocoder {
     | { latitude: number; longitude: number }
     | string;
 
-  function init(apiKey: string, options?: Object, configuration?: Object): void;
+  function init(apiKey: string, options?: Object, configuration?: Configuration): void;
   function isInit(): boolean;
   function from(...params: fromParams[]): Promise<GeocoderResponse>;
 }
 
-declare module 'react-native-geocoding' {
+declare module 'react-native-geocoding-custom' {
   export default Geocoder;
 }
